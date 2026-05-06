@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyStyle Premium - Vêtements Haut de Gamme pour Bébés</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header Top Info -->
+    <div class="header-top">
+        <div class="container">
+            <div class="header-info">
+                <span><i class="fas fa-truck"></i> Livraison gratuite à partir de 50 000 FCFA</span>
+                <span><i class="fas fa-shield-alt"></i> Paiement 100% sécurisé</span>
+                <span><i class="fas fa-headset"></i> Service client 24/7</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation principale -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>👶 BabyStyle</h1>
+                    <p class="tagline">Élégance & Confort Premium</p>
+                </div>
+
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                        <li class="dropdown">
+                            <a href="#produits" class="nav-link">Collections <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <a href="#" onclick="filterProducts('nouveau')">Nouveautés</a>
+                                <a href="#" onclick="filterProducts('garcon')">Pour les garçons</a>
+                                <a href="#" onclick="filterProducts('fille')">Pour les filles</a>
+                                <a href="#" onclick="filterProducts('unisexe')">Unisexe</a>
+                                <a href="#" onclick="filterProducts('occasion')">Occasions spéciales</a>
+                            </div>
+                        </li>
+                        <li><a href="#blog" class="nav-link">Conseils</a></li>
+                        <li><a href="#avis" class="nav-link">Avis</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button id="wishlist-btn" class="icon-btn" onclick="toggleWishlist()" title="Ma liste">
+                        <i class="far fa-heart"></i> <span id="wishlist-count">0</span>
+                    </button>
+                    <button id="cart-btn" class="icon-btn cart-icon" onclick="scrollToCart()" title="Panier">
+                        <i class="fas fa-shopping-bag"></i> <span id="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Hero Bannière -->
+    <section id="accueil" class="hero-banner">
+        <div class="hero-slider">
+            <div class="slide active"
+                style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.7) 0%, rgba(78, 205, 196, 0.7) 100%), url('https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=1200&h=600&fit=crop'); background-size: cover; background-position: center;">
+                <div class="slide-content">
+                    <h2>Collection Printemps 2026</h2>
+                    <p>Couleurs tendance et confort premium pour vos petits</p>
+                    <a href="#produits" class="btn btn-light">Découvrir</a>
+                </div>
+            </div>
+            <div class="slide"
+                style="background: linear-gradient(135deg, rgba(162, 155, 254, 0.7) 0%, rgba(255, 214, 165, 0.7) 100%), url('https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1200&h=600&fit=crop'); background-size: cover; background-position: center;">
+                <div class="slide-content">
+                    <h2>Soldes jusqu'à -40%</h2>
+                    <p>Sur la collection d'été</p>
+                    <a href="#produits" class="btn btn-light">Voir les offres</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Catégories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Nos Collections</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterProducts('garcon')">
+                    <div class="category-icon"><i class="fas fa-user-circle"></i></div>
+                    <h3>Pour les garçons</h3>
+                    <p>50+ produits</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('fille')">
+                    <div class="category-icon"><i class="fas fa-user-circle"></i></div>
+                    <h3>Pour les filles</h3>
+                    <p>60+ produits</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('unisexe')">
+                    <div class="category-icon"><i class="fas fa-users"></i></div>
+                    <h3>Unisexe</h3>
+                    <p>35+ produits</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('nouveau')">
+                    <div class="category-icon"><i class="fas fa-star"></i></div>
+                    <h3>Nouveautés</h3>
+                    <p>Chaque semaine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres et Produits -->
+    <section id="produits" class="products">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="section-title">Nos Produits Premium</h2>
+                <div class="filter-controls">
+                    <select id="sort" onchange="sortProducts()" class="select-filter">
+                        <option value="recent">Plus récents</option>
+                        <option value="price-low">Prix: bas à haut</option>
+                        <option value="price-high">Prix: haut à bas</option>
+                        <option value="popular">Plus populaires</option>
+                    </select>
+                    <button class="btn btn-outline" onclick="resetFilters()">Réinitialiser</button>
+                </div>
+            </div>
+            <div class="products-grid" id="products-grid"></div>
+        </div>
+    </section>
+
+    <!-- Modal Produit Détaillé -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content large-modal">
+            <span class="close" onclick="closeModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img id="modal-image" src="" alt="Produit" class="main-image">
+                </div>
+                <div class="modal-info">
+                    <div class="product-header">
+                        <h2 id="modal-title"></h2>
+                        <button class="wishlist-btn" id="wishlist-toggle" onclick="toggleProductWishlist()">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(45 avis)</span>
+                    </div>
+
+                    <p id="modal-description" class="product-description"></p>
+
+                    <div class="price-section">
+                        <span class="price" id="modal-price"></span>
+                        <span class="old-price" id="modal-old-price"></span>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label><strong>Taille:</strong></label>
+                            <div id="modal-sizes" class="sizes-grid"></div>
+                        </div>
+
+                        <div class="option-group">
+                            <label><strong>Couleur:</strong></label>
+                            <div id="modal-colors" class="colors-grid"></div>
+                        </div>
+
+                        <div class="option-group">
+                            <label><strong>Quantité:</strong></label>
+                            <div class="quantity-selector">
+                                <button onclick="changeQuantity(-1)">−</button>
+                                <input type="number" id="quantity" min="1" value="1" readonly>
+                                <button onclick="changeQuantity(1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label><strong>Matière:</strong></label>
+                            <p id="modal-material">100% Coton biologique</p>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="addToCart()">
+                            <i class="fas fa-shopping-bag"></i> Ajouter au panier
+                        </button>
+                        <button class="btn btn-secondary" onclick="buyNow()">
+                            <i class="fas fa-bolt"></i> Acheter maintenant
+                        </button>
+                    </div>
+
+                    <div class="product-benefits">
+                        <div class="benefit">
+                            <i class="fas fa-check"></i>
+                            <span>Livraison gratuite</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check"></i>
+                            <span>Retour gratuit 30 jours</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check"></i>
+                            <span>Garanti sans substances toxiques</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Blog/Conseils -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">Conseils & Astuces</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://via.placeholder.com/300x200?text=Conseil1" alt="Conseil">
+                    </div>
+                    <div class="blog-content">
+                        , <h3>Comment choisir la bonne taille</h3>
+                        <p>Guide complet pour trouver la taille idéale pour votre bébé</p>
+                        <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://via.placeholder.com/300x200?text=Conseil2" alt="Conseil">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Entretien des vêtements délicats</h3>
+                        <p>Conseils pour garder les vêtements de bébé comme neufs</p>
+                        <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://via.placeholder.com/300x200?text=Conseil3" alt="Conseil">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Les meilleures matières pour la peau sensible</h3>
+                        <p>Tout ce que vous devez savoir sur les matières premium</p>
+                        <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avis Clients -->
+    <section id="avis" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Avis de Nos Clients</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Excellent qualité et livraison rapide! Ma fille adore ses nouveaux
+                        vêtements!"</p>
+                    <p class="reviewer">- Fatoumata M.</p>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Les couleurs sont magnifiques et les prix sont compétitifs. Service client
+                        très professionnel."</p>
+                    <p class="reviewer">- Aminata D.</p>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★☆</div>
+                    <p class="review-text">"Produits premium, confortables pour mon petit. Un peu cher mais ça en vaut
+                        la peine!"</p>
+                    <p class="reviewer">- Mariam K.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Inscrivez-vous à notre newsletter</h2>
+            <p>Recevez les dernières nouveautés et les offres exclusives</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Votre email..." required>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Section Panier -->
+    <section id="panier" class="cart-section">
+        <div class="container">
+            <h2 class="section-title">Votre Panier</h2>
+            <div class="cart-content">
+                <div class="cart-items">
+                    <div id="cart-items-list"></div>
+                </div>
+                <div class="cart-summary">
+                    <h3>Résumé de la commande</h3>
+                    <div class="summary-item">
+                        <span>Sous-total:</span>
+                        <span id="subtotal">0 FCFA</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Frais de livraison:</span>
+                        <span id="shipping">2000 FCFA</span>
+                    </div>
+                    <div class="summary-item discount">
+                        <span>Remise:</span>
+                        <span id="discount">0 FCFA</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="total">2000 FCFA</span>
+                    </div>
+                    <div class="promo-code">
+                        <input type="text" id="promo" placeholder="Code promo...">
+                        <button onclick="applyPromo()">Appliquer</button>
+                    </div>
+                    <button class="btn btn-primary full-width" onclick="goToCheckout()">Passer commande</button>
+                    <button class="btn btn-secondary full-width" onclick="continueShopping()">Continuer achats</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Checkout -->
+    <section id="checkout" class="checkout-section hidden">
+        <div class="container">
+            <h2 class="section-title">Finaliser votre commande</h2>
+            <div class="checkout-grid">
+                <div class="checkout-form">
+                    <h3><i class="fas fa-map-marker-alt"></i> Adresse de livraison</h3>
+                    <form id="checkout-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Prénom *</label>
+                                <input type="text" id="firstname" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom *</label>
+                                <input type="text" id="lastname" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse complète *</label>
+                            <textarea id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Ville *</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Quartier</label>
+                                <input type="text" id="quartier">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="payment-methods">
+                    <h3><i class="fas fa-credit-card"></i> Mode de paiement</h3>
+
+                    <div class="payment-option">
+                        <input type="radio" id="wave" name="payment" value="wave" checked>
+                        <label for="wave">
+                            <div class="payment-header">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Payer avec Wave</span>
+                            </div>
+                            <p>Paiement mobile sécurisé</p>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" id="whatsapp" name="payment" value="whatsapp">
+                        <label for="whatsapp">
+                            <div class="payment-header">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Passer la commande WhatsApp</span>
+                            </div>
+                            <p>Recevoir les détails via WhatsApp</p>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" id="virement" name="payment" value="virement">
+                        <label for="virement">
+                            <div class="payment-header">
+                                <i class="fas fa-university"></i>
+                                <span>Virement bancaire</span>
+                            </div>
+                            <p>Virements sécurisés acceptés</p>
+                        </label>
+                    </div>
+
+                    <button class="btn btn-primary full-width" onclick="processPayment()">Confirmer la commande</button>
+                    <button class="btn btn-secondary full-width" onclick="backToCart()">Retour au panier</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Nous Contacter</h2>
+            <div class="contact-grid">
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Réponse rapide sous 5 minutes</p>
+                    <a href="https://wa.me/22699999999" target="_blank" class="btn btn-primary">Contacter</a>
+                </div>
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>support@babystyle.com</p>
+                    <a href="mailto:support@babystyle.com" class="btn btn-primary">Envoyer</a>
+                </div>
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visite nous</h3>
+                    <p>Dakar, Sénégal</p>
+                    <a href="#" class="btn btn-primary">Localiser</a>
+                </div>
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Téléphone</h3>
+                    <p>+221 77 XXX XX XX</p>
+                    <a href="tel:+221777777777" class="btn btn-primary">Appeler</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>À Propos</h4>
+                    <ul>
+                        <li><a href="#">Qui sommes-nous</a></li>
+                        <li><a href="#">Notre Histoire</a></li>
+                        <li><a href="#">Nos valeurs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Assistance</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Conditions</h4>
+                    <ul>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Politique de cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BabyStyle - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
